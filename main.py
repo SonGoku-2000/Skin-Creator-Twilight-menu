@@ -2,11 +2,31 @@
 
 from PIL import Image
 from pathlib import Path
+from tkinter.filedialog import askopenfilename
+import tkinter as Tk
+from tkinter import TclError
 
 carpetaImagenes = "Imagenes/"
 carpetaPlantillas = carpetaImagenes + "Plantillas/"
 carpetaPruebas = carpetaImagenes + "Pruebas/"
 carpetaSkins = "Skins/"
+
+
+def seleccionarImagen():
+    frame = Tk.Tk()
+
+    # vvv Ocultar archivos ocultos
+    try:
+        frame.tk.call('tk_getOpenFile', '-foobarbaz')
+    except TclError:
+        pass
+    frame.tk.call('set', '::tk::dialog::file::showHiddenVar', '0')
+    # ^^^ Ocultar archivos ocultos
+
+    archivo = askopenfilename(title='Seleccione un juego',
+                              filetypes=(('Imagenes', ('*.jpg', '*.jpeg', '*.png')),
+                                         ('All', '*.*')))
+    return archivo
 
 
 def guardarImagen(dirImagen: str, dirSalida: str, nombreSalida: str):
@@ -32,5 +52,5 @@ def crearPaquete(imagenBase: str, nombrePaquete: str = "white", paqueteBase: str
 
 
 if __name__ == "__main__":
-    dirImagenBase = carpetaPlantillas + "gine.jpg"
-    crearPaquete(dirImagenBase, "test1")
+    dirImagenBase = seleccionarImagen()
+    crearPaquete(dirImagenBase, "test")
