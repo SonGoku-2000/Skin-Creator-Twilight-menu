@@ -73,6 +73,23 @@ def imagenBottomBubble(dirImagenBase: str, carpetaSkin: Path):
     temp.rmdir()
 
 
+def imagenBottomBubbleMacro(dirImagenBase: str, carpetaSkin: Path):
+    temp = Path(".temp")
+    temp.mkdir(parents=True, exist_ok=True)
+    dirImagenTemp = temp.joinpath("temp.png")
+
+    with Image.open(dirImagenBase) as imagenBase:
+        reescalada = imagenBase.resize((256, 192))
+        with Image.open(carpetaPlantillas + "white/background/bottom_bubble_macro.png") as bottomBubbleMacro:
+            reescalada.paste(bottomBubbleMacro, (0, 0), bottomBubbleMacro)
+        reescalada.save(dirImagenTemp)
+
+    guardarImagen(dirImagenTemp.__str__(), carpetaSkin.__str__() +
+                  "/background/", "bottom_bubble_macro.png")
+    dirImagenTemp.unlink()
+    temp.rmdir()
+
+
 def imagenBottom(dirImagenBase: str, carpetaSkin: Path):
     temp = Path(".temp")
     temp.mkdir(parents=True, exist_ok=True)
@@ -95,8 +112,7 @@ def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: 
     carpetaSkin.mkdir(parents=True, exist_ok=True)
     imagenBottom(dirImagenBase, carpetaSkin)
     imagenBottomBubble(dirImagenBase, carpetaSkin)
-    guardarImagen(dirImagenBase, carpetaSkin.__str__() +
-                  "/background/", "bottom_bubble_macro.png")
+    imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
     imagenBottomMoving(dirImagenBase, carpetaSkin)
 
 
