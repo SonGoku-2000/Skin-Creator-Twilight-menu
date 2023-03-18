@@ -25,6 +25,7 @@ def imagenBottomMoving(dirImagenBase: str, carpetaSkin: Path):
         with Image.open(carpetaPlantillas + "white/background/bottom_moving.png") as bottomMoving:
             reescalada.paste(bottomMoving, (0, 0), bottomMoving)
         reescalada.save(dirImagenTemp)
+        reescalada.close()
 
     guardarImagen(dirImagenTemp.__str__(), carpetaSkin.__str__() +
                   "/background/", "bottom_moving.png")
@@ -42,6 +43,7 @@ def imagenBottomBubble(dirImagenBase: str, carpetaSkin: Path):
         with Image.open(carpetaPlantillas + "white/background/bottom_bubble.png") as bottomBubble:
             reescalada.paste(bottomBubble, (0, 0), bottomBubble)
         reescalada.save(dirImagenTemp)
+        reescalada.close()
 
     guardarImagen(dirImagenTemp.__str__(), carpetaSkin.__str__() +
                   "/background/", "bottom_bubble.png")
@@ -59,6 +61,7 @@ def imagenBottomBubbleMacro(dirImagenBase: str, carpetaSkin: Path):
         with Image.open(carpetaPlantillas + "white/background/bottom_bubble_macro.png") as bottomBubbleMacro:
             reescalada.paste(bottomBubbleMacro, (0, 0), bottomBubbleMacro)
         reescalada.save(dirImagenTemp)
+        reescalada.close()
 
     guardarImagen(dirImagenTemp.__str__(), carpetaSkin.__str__() +
                   "/background/", "bottom_bubble_macro.png")
