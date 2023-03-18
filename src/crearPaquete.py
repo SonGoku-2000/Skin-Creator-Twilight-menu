@@ -1,4 +1,5 @@
 from pathlib import Path
+from distutils.dir_util import copy_tree
 from PIL import Image
 
 carpetaImagenes = "Imagenes/"
@@ -75,6 +76,7 @@ def imagenBottom(dirImagenBase: str, carpetaSkin: Path):
         with Image.open(carpetaPlantillas + "white/background/bottom.png") as bottom:
             reescalada.paste(bottom, (0, 0), bottom)
         reescalada.save(dirImagenTemp)
+        reescalada.close()
 
     guardarImagen(dirImagenTemp.__str__(), carpetaSkin.__str__() +
                   "/background/", "bottom.png")
@@ -88,10 +90,16 @@ def imagenTop(dirImagenBase: str, carpetaSkin: Path):
 
 
 def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: str = ""):
-    carpetaSkin = Path(carpetaSkins + nombrePaquete + "/")
+    carpetaSkin = Path(carpetaSkins + nombrePaquete)
     carpetaSkin.mkdir(parents=True, exist_ok=True)
     imagenBottom(dirImagenBase, carpetaSkin)
     imagenBottomBubble(dirImagenBase, carpetaSkin)
     imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
     imagenBottomMoving(dirImagenBase, carpetaSkin)
     imagenTop(dirImagenBase, carpetaSkin)
+    copy_tree(carpetaPlantillas + "white/battery",carpetaSkin.__str__()+"/battery")
+    copy_tree(carpetaPlantillas + "white/grf",carpetaSkin.__str__()+"/grf")
+    copy_tree(carpetaPlantillas + "white/quickmenu",carpetaSkin.__str__()+"/quickmenu")
+    copy_tree(carpetaPlantillas + "white/ui",carpetaSkin.__str__()+"/ui")
+    copy_tree(carpetaPlantillas + "white/volume",carpetaSkin.__str__()+"/volume")
+    
