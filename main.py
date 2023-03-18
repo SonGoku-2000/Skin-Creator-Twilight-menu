@@ -14,6 +14,7 @@ carpetaSkins = "Skins/"
 
 def seleccionarImagen():
     frame = Tk.Tk()
+    frame.withdraw()
 
     # vvv Ocultar archivos ocultos
     try:
