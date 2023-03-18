@@ -107,6 +107,11 @@ def imagenBottom(dirImagenBase: str, carpetaSkin: Path):
     temp.rmdir()
 
 
+def imagenTop(dirImagenBase: str, carpetaSkin: Path):
+    guardarImagen(carpetaPlantillas + "white/background/top.png", carpetaSkin.__str__() +
+                  "/background/", "top.png")
+
+
 def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: str = ""):
     carpetaSkin = Path(carpetaSkins + nombrePaquete + "/")
     carpetaSkin.mkdir(parents=True, exist_ok=True)
@@ -114,6 +119,7 @@ def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: 
     imagenBottomBubble(dirImagenBase, carpetaSkin)
     imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
     imagenBottomMoving(dirImagenBase, carpetaSkin)
+    imagenTop(dirImagenBase, carpetaSkin)
 
 
 if __name__ == "__main__":
