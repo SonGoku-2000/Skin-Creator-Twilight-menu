@@ -79,12 +79,44 @@ class modelo():
                 imagenBase.paste(bottom, (0, 0), bottom)
             imagenBase.save(dirImagenTemp)
 
-        self.__guardarImagen(dirImagenTemp, carpetaSkin.joinpath("background"),
+        self.__guardarImagen(dirImagenTemp,
+                             carpetaSkin.joinpath("background"),
                              "bottom.png")
         dirImagenTemp.unlink()
         temp.rmdir()
 
-    def crearSkin(self, dirImagenBase: Path, nombrePaquete: str = "white", paqueteBase: str = "white"):
+    def __imagenBottomBubble(self, dirImagenBase: Path, carpetaSkin: Path):
+        """
+        Parameters
+        ----------
+        dirImagenBase : Path
+            Directorio que de la imagen que se usara como base para el paquete.
+
+        carpetaSkin : Path
+            Carpeta de la skin en donde se van a guardar la imagen bottom_bubble.
+        """
+
+        temp = Path(".temp")
+        temp.mkdir(parents=True, exist_ok=True)
+        dirImagenTemp = temp.joinpath("temp.png")
+
+        dirImagenDecoracion = self.CARPETA_PLANTILLAS.joinpath(
+            "white/background/bottom_bubble.png")
+
+        with Image.open(dirImagenBase) as imagenBase:
+            imagenBase = imagenBase.resize(self.TAMANO_A_CONVERTIR)
+
+            with Image.open(dirImagenDecoracion) as bottom_bubble:
+                imagenBase.paste(bottom_bubble, (0, 0), bottom_bubble)
+            imagenBase.save(dirImagenTemp)
+
+        self.__guardarImagen(dirImagenTemp,
+                             carpetaSkin.joinpath("background"),
+                             "bottom_bubble.png")
+        dirImagenTemp.unlink()
+        temp.rmdir()
+
+    def crearSkin(self, nombrePaquete: str = "white", paqueteBase: str = "white"):
         """
         Parameters
         ----------
@@ -100,11 +132,13 @@ class modelo():
 
         carpetaSkin = self.CARPETA_SKINS.joinpath(nombrePaquete)
         carpetaSkin.mkdir(parents=True, exist_ok=True)
-
+        dirImagenBase = Path(self.dirImagen)
+        
         self.__imagenBottom(dirImagenBase, carpetaSkin)
+        self.__imagenBottomBubble(dirImagenBase, carpetaSkin)
 
 
 if __name__ == '__main__':
     model = modelo()
     model.seleccionarImagen()
-    print(model.dirImagen)
+    model.crearSkin()
