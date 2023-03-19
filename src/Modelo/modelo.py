@@ -1,10 +1,13 @@
 from pathlib import Path
 from tkinter.filedialog import askopenfilename
 
+
 class modelo():
     def __init__(self) -> None:
-        self.dirImagen = ''
-        self.dirWBFS = ''
+        self.CARPETA_IMAGENES = Path("Imagenes")
+        self.CARPETA_PLANTILLAS = self.CARPETA_IMAGENES.joinpath("Plantillas")
+        self.CARPETA_SKINS = Path("Skins")
+        self.dirImagen = ""
 
     def __selectorImagen(self, dirBase: str = '.') -> str:
         """
