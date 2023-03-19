@@ -22,9 +22,10 @@ class ventanaPrincipal():
 class PanelImagen():
     def __init__(self, root):
         self.frame = Tk.Frame(root, width=480, height=320)
-        self.frame.pack(side=Tk.RIGHT,fill=Tk.BOTH,expand=1)
+        self.frame.pack(side=Tk.RIGHT, fill=Tk.BOTH, expand=1)
         self.frame.config(bd=10)
         self.frame.config(relief=Tk.SUNKEN)
+
 
 class PanelLateral():
     def __init__(self, root):
@@ -32,14 +33,18 @@ class PanelLateral():
         self.frame.pack(side=Tk.LEFT, fill=Tk.BOTH, expand=1)
         self.frame.config(bd=10)
 
-        self.textoSelectImagen = Tk.Label(self.frame, text='Seleccionar Imagen Base')
+        self.textoSelectImagen = Tk.Label(self.frame,
+                                          text='Seleccionar Imagen Base')
         self.textoSelectImagen.pack(side='top', fill=Tk.BOTH)
-        self.botonSelectImagen = Tk.Button(self.frame, text="Selecionar Imagen")
+        self.botonSelectImagen = Tk.Button(self.frame,
+                                           text="Selecionar Imagen")
         self.botonSelectImagen.pack(side="top", fill=Tk.BOTH)
 
         self.textoCrearSkin = Tk.Label(self.frame, text='Crear Skin')
         self.textoCrearSkin.pack(side='top', fill=Tk.BOTH)
-        self.botonCrearSkin = Tk.Button(self.frame, text="Crear Skin")
+        self.botonCrearSkin = Tk.Button(self.frame,
+                                        state='disabled',
+                                        text="Crear Skin")
         self.botonCrearSkin.pack(side="top", fill=Tk.BOTH)
 
     def desactivarBotonCrearSkin(self):
@@ -53,6 +58,7 @@ class PanelLateral():
             self.botonCrearSkin['state'] = Tk.DISABLED
         else:
             self.botonCrearSkin['state'] = Tk.NORMAL
+
 
 if __name__ == '__main__':
     raiz = Tk.Tk()
