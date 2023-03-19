@@ -97,7 +97,7 @@ class modelo():
         dirImagenTemp.unlink()
         temp.rmdir()
 
-    def __imagenBottom(self, dirImagenBase: Path, carpetaSkin: Path):
+    def __imagenBottom(self, dirImagenBase: Path, carpetaSkin: Path, paqueteBase: str):
         """
         Parameters
         ----------
@@ -107,9 +107,12 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom.
         """
-        self.__backgroundHelper(dirImagenBase, carpetaSkin, "bottom.png")
+        self.__backgroundHelper(dirImagenBase,
+                                carpetaSkin,
+                                "bottom.png",
+                                paqueteBase)
 
-    def __imagenBottomBubble(self, dirImagenBase: Path, carpetaSkin: Path):
+    def __imagenBottomBubble(self, dirImagenBase: Path, carpetaSkin: Path, paqueteBase: str):
         """
         Parameters
         ----------
@@ -119,10 +122,11 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom_bubble.
         """
-        self.__backgroundHelper(
-            dirImagenBase, carpetaSkin, "bottom_bubble.png")
+        self.__backgroundHelper(dirImagenBase,
+                                carpetaSkin,
+                                "bottom_bubble.png", paqueteBase)
 
-    def __imagenBottomBubbleMacro(self, dirImagenBase: Path, carpetaSkin: Path):
+    def __imagenBottomBubbleMacro(self, dirImagenBase: Path, carpetaSkin: Path, paqueteBase: str):
         """
         Parameters
         ----------
@@ -132,10 +136,12 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom_bubble_macro.
         """
-        self.__backgroundHelper(
-            dirImagenBase, carpetaSkin, "bottom_bubble_macro.png")
+        self.__backgroundHelper(dirImagenBase,
+                                carpetaSkin,
+                                "bottom_bubble_macro.png",
+                                paqueteBase)
 
-    def __imagenBottomMoving(self, dirImagenBase: Path, carpetaSkin: Path):
+    def __imagenBottomMoving(self, dirImagenBase: Path, carpetaSkin: Path, paqueteBase: str):
         """
         Parameters
         ----------
@@ -145,10 +151,12 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom_moving.
         """
-        self.__backgroundHelper(
-            dirImagenBase, carpetaSkin, "bottom_moving.png")
+        self.__backgroundHelper(dirImagenBase,
+                                carpetaSkin,
+                                "bottom_moving.png",
+                                paqueteBase)
 
-    def __imagenTop(self, dirImagenBase: Path, carpetaSkin: Path):
+    def __imagenTop(self, dirImagenBase: Path, carpetaSkin: Path, paqueteBase: str):
         """
         Parameters
         ----------
@@ -180,11 +188,26 @@ class modelo():
         carpetaSkin.mkdir(parents=True, exist_ok=True)
         dirImagenBase = Path(self.dirImagen)
 
-        self.__imagenBottom(dirImagenBase, carpetaSkin)
-        self.__imagenBottomBubble(dirImagenBase, carpetaSkin)
-        self.__imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
-        self.__imagenBottomMoving(dirImagenBase, carpetaSkin)
-        self.__imagenTop(dirImagenBase, carpetaSkin)
+        self.__imagenBottom(dirImagenBase, carpetaSkin, paqueteBase)
+        self.__imagenBottomBubble(dirImagenBase, carpetaSkin, paqueteBase)
+        self.__imagenBottomBubbleMacro(dirImagenBase, carpetaSkin, paqueteBase)
+        self.__imagenBottomMoving(dirImagenBase, carpetaSkin, paqueteBase)
+        self.__imagenTop(dirImagenBase, carpetaSkin, paqueteBase)
+
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "battery").__str__(),
+                  carpetaSkin.joinpath("battery").__str__())
+
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "grf").__str__(),
+                  carpetaSkin.joinpath("grf").__str__())
+
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "quickmenu").__str__(),
+                  carpetaSkin.joinpath("quickmenu").__str__())
+
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "ui").__str__(),
+                  carpetaSkin.joinpath("ui").__str__())
+
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "volume").__str__(),
+                  carpetaSkin.joinpath("volume").__str__())
 
 
 if __name__ == '__main__':
