@@ -54,6 +54,49 @@ class modelo():
     def seleccionarImagen(self):
         self.dirImagen = self.__selectorImagen()
 
+    def __backgroundHelper(self, dirImagenBase: Path, carpetaSkin: Path, pantalla: str, plantillaBase: str = "white"):
+        """
+        Funcion auxiliar que permite la facil creacion de las imagenes de la carpeta background
+
+        Parameters
+        ----------
+        dirImagenBase : Path
+            Directorio que de la imagen que se usara como base para el paquete.
+
+        carpetaSkin : Path
+            Carpeta de la skin en donde se van a guardar la imagen bottom.
+        
+        pantalla: str
+            Nombre que le da TWiLight Menu++ a los diferentes estados de la pantalla
+                posibles valores:
+                "bottom_bubble_macro.png" ,                                                                        
+                "bottom_bubble.png",                                   
+                "bottom_moving.png",                            
+                "bottom.png",
+                "top.png"
+        """
+        
+        temp = Path(".temp")
+        temp.mkdir(parents=True, exist_ok=True)
+        dirImagenTemp = temp.joinpath("temp.png")
+
+        dirImagenDecoracion = self.CARPETA_PLANTILLAS.joinpath(plantillaBase,
+                                                               "background",
+                                                               pantalla)
+
+        with Image.open(dirImagenBase) as imagenBase:
+            imagenBase = imagenBase.resize(self.TAMANO_A_CONVERTIR)
+
+            with Image.open(dirImagenDecoracion) as decoracion:
+                imagenBase.paste(decoracion, (0, 0), decoracion)
+            imagenBase.save(dirImagenTemp)
+
+        self.__guardarImagen(dirImagenTemp,
+                             carpetaSkin.joinpath("background"),
+                             pantalla)
+        dirImagenTemp.unlink()
+        temp.rmdir()
+
     def __imagenBottom(self, dirImagenBase: Path, carpetaSkin: Path):
         """
         Parameters
@@ -64,26 +107,7 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom.
         """
-
-        temp = Path(".temp")
-        temp.mkdir(parents=True, exist_ok=True)
-        dirImagenTemp = temp.joinpath("temp.png")
-
-        dirImagenDecoracion = self.CARPETA_PLANTILLAS.joinpath(
-            "white/background/bottom.png")
-
-        with Image.open(dirImagenBase) as imagenBase:
-            imagenBase = imagenBase.resize(self.TAMANO_A_CONVERTIR)
-
-            with Image.open(dirImagenDecoracion) as bottom:
-                imagenBase.paste(bottom, (0, 0), bottom)
-            imagenBase.save(dirImagenTemp)
-
-        self.__guardarImagen(dirImagenTemp,
-                             carpetaSkin.joinpath("background"),
-                             "bottom.png")
-        dirImagenTemp.unlink()
-        temp.rmdir()
+        self.__backgroundHelper(dirImagenBase,carpetaSkin,"bottom.png")
 
     def __imagenBottomBubble(self, dirImagenBase: Path, carpetaSkin: Path):
         """
@@ -95,26 +119,7 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom_bubble.
         """
-
-        temp = Path(".temp")
-        temp.mkdir(parents=True, exist_ok=True)
-        dirImagenTemp = temp.joinpath("temp.png")
-
-        dirImagenDecoracion = self.CARPETA_PLANTILLAS.joinpath(
-            "white/background/bottom_bubble.png")
-
-        with Image.open(dirImagenBase) as imagenBase:
-            imagenBase = imagenBase.resize(self.TAMANO_A_CONVERTIR)
-
-            with Image.open(dirImagenDecoracion) as bottom_bubble:
-                imagenBase.paste(bottom_bubble, (0, 0), bottom_bubble)
-            imagenBase.save(dirImagenTemp)
-
-        self.__guardarImagen(dirImagenTemp,
-                             carpetaSkin.joinpath("background"),
-                             "bottom_bubble.png")
-        dirImagenTemp.unlink()
-        temp.rmdir()
+        self.__backgroundHelper(dirImagenBase,carpetaSkin,"bottom_bubble.png")
 
     def crearSkin(self, nombrePaquete: str = "white", paqueteBase: str = "white"):
         """
@@ -133,7 +138,7 @@ class modelo():
         carpetaSkin = self.CARPETA_SKINS.joinpath(nombrePaquete)
         carpetaSkin.mkdir(parents=True, exist_ok=True)
         dirImagenBase = Path(self.dirImagen)
-        
+
         self.__imagenBottom(dirImagenBase, carpetaSkin)
         self.__imagenBottomBubble(dirImagenBase, carpetaSkin)
 
