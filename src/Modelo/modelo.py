@@ -148,6 +148,20 @@ class modelo():
         self.__backgroundHelper(
             dirImagenBase, carpetaSkin, "bottom_moving.png")
 
+    def __imagenTop(self, dirImagenBase: Path, carpetaSkin: Path):
+        """
+        Parameters
+        ----------
+        dirImagenBase : Path
+            Directorio que de la imagen que se usara como base para el paquete.
+
+        carpetaSkin : Path
+            Carpeta de la skin en donde se van a guardar la imagen top.
+        """
+        self.__guardarImagen(self.CARPETA_PLANTILLAS.joinpath("white/background/top.png"),
+                             carpetaSkin.joinpath("background"),
+                             "top.png")
+
     def crearSkin(self, nombrePaquete: str = "white", paqueteBase: str = "white"):
         """
         Parameters
@@ -170,6 +184,7 @@ class modelo():
         self.__imagenBottomBubble(dirImagenBase, carpetaSkin)
         self.__imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
         self.__imagenBottomMoving(dirImagenBase, carpetaSkin)
+        self.__imagenTop(dirImagenBase, carpetaSkin)
 
 
 if __name__ == '__main__':
