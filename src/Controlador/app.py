@@ -25,8 +25,10 @@ class Controller():
         self.modelo.seleccionarImagen()
         if self.modelo.dirImagen != "":
             self.view.panelLateral.activarBotonCrearSkin()
+            self.view.panelImagen.setImagen(Path(self.modelo.dirImagen))
         else:
             self.view.panelLateral.desactivarBotonCrearSkin()
+            self.view.panelImagen.setImagen(Path("src/Vista/a.jpg"))
         self.root.mainloop()
 
 

@@ -1,5 +1,8 @@
 import tkinter as Tk
 from tkinter import TclError
+from PIL import Image
+from PIL import ImageTk
+from pathlib import Path
 
 
 class ventanaPrincipal():
@@ -21,10 +24,23 @@ class ventanaPrincipal():
 
 class PanelImagen():
     def __init__(self, root):
-        self.frame = Tk.Frame(root, width=480, height=320)
+        self.width=480 
+        self.height=320
+
+        self.frame = Tk.Frame(root, width=self.width, height=self.height)
         self.frame.pack(side=Tk.RIGHT, fill=Tk.BOTH, expand=1)
         self.frame.config(bd=10)
         self.frame.config(relief=Tk.SUNKEN)
+        self.imagenTk = ImageTk.PhotoImage(Image.open("src/Vista/a.jpg"))
+        
+        self.label = Tk.Label(self.frame, width=self.width, height=self.height,image=self.imagenTk)
+        self.label.pack()
+
+    def setImagen(self, dirImagen: Path):
+        with Image.open(dirImagen) as imagen:
+            self.imagenTk = ImageTk.PhotoImage(imagen.resize((self.width,self.height)))
+            self.label.configure(image=self.imagenTk)
+
 
 
 class PanelLateral():
@@ -62,5 +78,7 @@ class PanelLateral():
 
 if __name__ == '__main__':
     raiz = Tk.Tk()
-    ventanaPrincipal(raiz)
+    v = ventanaPrincipal(raiz)
+    v.panelImagen.setImagen(Path(
+        "/home/songoku/Documentos/Proyectos_programacion/Python/Skin Creator Twiligt menu++/Imagenes/Plantillas/gine.jpg"))
     raiz.mainloop()
