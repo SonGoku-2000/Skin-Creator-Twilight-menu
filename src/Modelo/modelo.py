@@ -1,9 +1,5 @@
-import subprocess
-import os
 from pathlib import Path
-from tkinter.filedialog import askdirectory, askopenfilename
-#from .descargar_portadas.descargar import descargar2D, descargar3D, descargarCD, descargarCoverFull
-
+from tkinter.filedialog import askopenfilename
 
 class modelo():
     def __init__(self) -> None:
