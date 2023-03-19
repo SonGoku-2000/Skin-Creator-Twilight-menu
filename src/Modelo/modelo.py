@@ -17,6 +17,11 @@ class modelo():
         """
         Despliega una ventana para seleccionar una imagen
 
+        Parameters
+        ----------
+        dirBase : str
+            Carpeta inicial de la ventana para seleccionar.
+
         Returns
         -------
         str
@@ -52,6 +57,9 @@ class modelo():
                 converted.save(dirSalida.joinpath(nombreSalida))
 
     def seleccionarImagen(self):
+        """
+        Establece el valor de la variable dirImagen usando el metodo __selectorImagen()
+        """
         self.dirImagen = self.__selectorImagen()
 
     def __backgroundHelper(self, dirImagenBase: Path, carpetaSkin: Path, pantalla: str, plantillaBase: str = "white"):

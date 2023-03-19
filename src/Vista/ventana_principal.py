@@ -24,23 +24,32 @@ class ventanaPrincipal():
 
 class PanelImagen():
     def __init__(self, root):
-        self.width=480 
-        self.height=320
+        self.width = 480
+        self.height = 320
 
         self.frame = Tk.Frame(root, width=self.width, height=self.height)
         self.frame.pack(side=Tk.RIGHT, fill=Tk.BOTH, expand=1)
         self.frame.config(bd=10)
         self.frame.config(relief=Tk.SUNKEN)
         self.imagenTk = ImageTk.PhotoImage(Image.open("src/Vista/a.jpg"))
-        
-        self.label = Tk.Label(self.frame, width=self.width, height=self.height,image=self.imagenTk)
+
+        self.label = Tk.Label(self.frame, width=self.width,
+                              height=self.height, image=self.imagenTk)
         self.label.pack()
 
     def setImagen(self, dirImagen: Path):
-        with Image.open(dirImagen) as imagen:
-            self.imagenTk = ImageTk.PhotoImage(imagen.resize((self.width,self.height)))
-            self.label.configure(image=self.imagenTk)
+        """
+        Establece la imagen de la previsualizacion
 
+        Parameters
+        ----------
+        dirImagen : Path
+            Ruta de la imagen la cual se va a usar para la previsualizacion.
+        """
+        with Image.open(dirImagen) as imagen:
+            self.imagenTk = ImageTk.PhotoImage(
+                imagen.resize((self.width, self.height)))
+            self.label.configure(image=self.imagenTk)
 
 
 class PanelLateral():
@@ -70,6 +79,9 @@ class PanelLateral():
         self.botonCrearSkin['state'] = Tk.NORMAL
 
     def cambiarEstadoBotonCrearSkin(self):
+        """
+        Invierte el estado del boton crearSkin de NORMAL a DISABLED y de DISABLED a NORMAL
+        """
         if (self.botonCrearSkin['state'] == Tk.NORMAL):
             self.botonCrearSkin['state'] = Tk.DISABLED
         else:
