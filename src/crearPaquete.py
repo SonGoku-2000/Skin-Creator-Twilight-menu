@@ -6,7 +6,20 @@ carpetaImagenes = "Imagenes/"
 carpetaPlantillas = carpetaImagenes + "Plantillas/"
 carpetaSkins = "Skins/"
 
+
 def guardarImagen(dirImagen: str, dirSalida: str, nombreSalida: str):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que va a ajustar al formato necesitado.
+
+    dirSalida : str
+        Carpeta de ale que se va a mover la imagen.
+    
+    nombreSalida : str
+        Nombre que va a tener la imagen en la carpeta de destino.
+    """
     tamanoImagen = (256, 192)
     Path(dirSalida).mkdir(parents=True, exist_ok=True)
     with Image.open(dirImagen) as image:
@@ -16,6 +29,16 @@ def guardarImagen(dirImagen: str, dirSalida: str, nombreSalida: str):
 
 
 def imagenBottomMoving(dirImagenBase: str, carpetaSkin: Path):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que se usara como base para el paquete.
+
+    carpetaSkin : Path
+        Carpeta de la skin en donde se van a guardar la imagen bottom_moving.
+    """
+
     temp = Path(".temp")
     temp.mkdir(parents=True, exist_ok=True)
     dirImagenTemp = temp.joinpath("temp.png")
@@ -34,6 +57,16 @@ def imagenBottomMoving(dirImagenBase: str, carpetaSkin: Path):
 
 
 def imagenBottomBubble(dirImagenBase: str, carpetaSkin: Path):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que se usara como base para el paquete.
+
+    carpetaSkin : Path
+        Carpeta de la skin en donde se van a guardar la imagen bottom_bubble.
+    """
+
     temp = Path(".temp")
     temp.mkdir(parents=True, exist_ok=True)
     dirImagenTemp = temp.joinpath("temp.png")
@@ -52,6 +85,16 @@ def imagenBottomBubble(dirImagenBase: str, carpetaSkin: Path):
 
 
 def imagenBottomBubbleMacro(dirImagenBase: str, carpetaSkin: Path):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que se usara como base para el paquete.
+
+    carpetaSkin : Path
+        Carpeta de la skin en donde se van a guardar la imagen bottom_bubble_macro.
+    """
+
     temp = Path(".temp")
     temp.mkdir(parents=True, exist_ok=True)
     dirImagenTemp = temp.joinpath("temp.png")
@@ -70,6 +113,16 @@ def imagenBottomBubbleMacro(dirImagenBase: str, carpetaSkin: Path):
 
 
 def imagenBottom(dirImagenBase: str, carpetaSkin: Path):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que se usara como base para el paquete.
+
+    carpetaSkin : Path
+        Carpeta de la skin en donde se van a guardar la imagen bottom.
+    """
+
     temp = Path(".temp")
     temp.mkdir(parents=True, exist_ok=True)
     dirImagenTemp = temp.joinpath("temp.png")
@@ -88,11 +141,34 @@ def imagenBottom(dirImagenBase: str, carpetaSkin: Path):
 
 
 def imagenTop(dirImagenBase: str, carpetaSkin: Path):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que se usara como base para el paquete.
+
+    carpetaSkin : Path
+        Carpeta de la skin en donde se van a guardar la imagen top.
+    """
+
     guardarImagen(carpetaPlantillas + "white/background/top.png", carpetaSkin.__str__() +
                   "/background/", "top.png")
 
 
-def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: str = ""):
+def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: str = "white"):
+    """
+    Parameters
+    ----------
+    dirImagenBase : str
+        Directorio que de la imagen que se usara como base para el paquete.
+
+    nombrePaquete : str, default "white"
+        Nombre que se le dara al paquete creado.
+
+    paqueteBase : str, default "white"
+        Nombre de la decoracion base que se usa para crear el paquete puede ser "white" o "dark".
+    """
+
     carpetaSkin = Path(carpetaSkins + nombrePaquete)
     carpetaSkin.mkdir(parents=True, exist_ok=True)
     imagenBottom(dirImagenBase, carpetaSkin)
@@ -100,9 +176,11 @@ def crearPaquete(dirImagenBase: str, nombrePaquete: str = "white", paqueteBase: 
     imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
     imagenBottomMoving(dirImagenBase, carpetaSkin)
     imagenTop(dirImagenBase, carpetaSkin)
-    copy_tree(carpetaPlantillas + "white/battery",carpetaSkin.__str__()+"/battery")
-    copy_tree(carpetaPlantillas + "white/grf",carpetaSkin.__str__()+"/grf")
-    copy_tree(carpetaPlantillas + "white/quickmenu",carpetaSkin.__str__()+"/quickmenu")
-    copy_tree(carpetaPlantillas + "white/ui",carpetaSkin.__str__()+"/ui")
-    copy_tree(carpetaPlantillas + "white/volume",carpetaSkin.__str__()+"/volume")
-    
+    copy_tree(carpetaPlantillas + "white/battery",
+              carpetaSkin.__str__()+"/battery")
+    copy_tree(carpetaPlantillas + "white/grf", carpetaSkin.__str__()+"/grf")
+    copy_tree(carpetaPlantillas + "white/quickmenu",
+              carpetaSkin.__str__()+"/quickmenu")
+    copy_tree(carpetaPlantillas + "white/ui", carpetaSkin.__str__()+"/ui")
+    copy_tree(carpetaPlantillas + "white/volume",
+              carpetaSkin.__str__()+"/volume")

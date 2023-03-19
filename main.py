@@ -6,7 +6,15 @@ from tkinter import TclError
 from src.crearPaquete import crearPaquete
 
 
-def seleccionarImagen():
+def seleccionarImagen() -> str:
+    """
+    Despliega una ventana para seleccionar una imagen
+    
+    Returns
+    -------
+    str
+        Retorna la imagen seleccionada en la ventana emergente.
+    """
     frame = Tk.Tk()
     frame.withdraw()
 
