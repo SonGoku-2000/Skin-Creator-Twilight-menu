@@ -65,7 +65,7 @@ class modelo():
 
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom.
-        
+
         pantalla: str
             Nombre que le da TWiLight Menu++ a los diferentes estados de la pantalla
                 posibles valores:
@@ -75,7 +75,7 @@ class modelo():
                 "bottom.png",
                 "top.png"
         """
-        
+
         temp = Path(".temp")
         temp.mkdir(parents=True, exist_ok=True)
         dirImagenTemp = temp.joinpath("temp.png")
@@ -107,7 +107,7 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom.
         """
-        self.__backgroundHelper(dirImagenBase,carpetaSkin,"bottom.png")
+        self.__backgroundHelper(dirImagenBase, carpetaSkin, "bottom.png")
 
     def __imagenBottomBubble(self, dirImagenBase: Path, carpetaSkin: Path):
         """
@@ -119,7 +119,21 @@ class modelo():
         carpetaSkin : Path
             Carpeta de la skin en donde se van a guardar la imagen bottom_bubble.
         """
-        self.__backgroundHelper(dirImagenBase,carpetaSkin,"bottom_bubble.png")
+        self.__backgroundHelper(
+            dirImagenBase, carpetaSkin, "bottom_bubble.png")
+
+    def __imagenBottomBubbleMacro(self, dirImagenBase: Path, carpetaSkin: Path):
+        """
+        Parameters
+        ----------
+        dirImagenBase : Path
+            Directorio que de la imagen que se usara como base para el paquete.
+
+        carpetaSkin : Path
+            Carpeta de la skin en donde se van a guardar la imagen bottom_bubble_macro.
+        """
+        self.__backgroundHelper(
+            dirImagenBase, carpetaSkin, "bottom_bubble_macro.png")
 
     def crearSkin(self, nombrePaquete: str = "white", paqueteBase: str = "white"):
         """
@@ -141,6 +155,7 @@ class modelo():
 
         self.__imagenBottom(dirImagenBase, carpetaSkin)
         self.__imagenBottomBubble(dirImagenBase, carpetaSkin)
+        self.__imagenBottomBubbleMacro(dirImagenBase, carpetaSkin)
 
 
 if __name__ == '__main__':
