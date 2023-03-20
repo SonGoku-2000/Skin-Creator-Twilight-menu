@@ -9,6 +9,7 @@ class modelo():
         self.CARPETA_IMAGENES = Path("Imagenes")
         self.CARPETA_PLANTILLAS = self.CARPETA_IMAGENES.joinpath("Plantillas")
         self.CARPETA_SKINS = Path("Skins")
+        self.TEMAS = ("white","black")
 
         self.TAMANO_A_CONVERTIR = (256, 192)
         self.dirImagen = ""

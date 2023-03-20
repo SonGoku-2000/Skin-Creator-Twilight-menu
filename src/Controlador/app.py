@@ -17,6 +17,8 @@ class Controller():
         self.view.panelLateral.botonSelectImagen.bind("<Button>",
                                                       self.seleccionarImagen)
         self.view.panelLateral.botonCrearSkin.bind("<Button>", self.crearSkin)
+        self.view.panelLateral.listaTemas["values"] = self.modelo.TEMAS
+        self.view.panelLateral.listaTemas.set(self.modelo.TEMAS[0])
 
     def run(self):
         """
@@ -42,7 +44,7 @@ class Controller():
         """
         Accion para el boton crearSkin. Crea las carpetas necesarias para crear la skin usando la funcion del modelo.py
         """
-        self.modelo.crearSkin()
+        self.modelo.crearSkin(paqueteBase=self.view.panelLateral.listaTemas.get())
 
 
 if __name__ == "__main__":

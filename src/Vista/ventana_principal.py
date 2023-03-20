@@ -25,7 +25,7 @@ class ventanaPrincipal():
 
 class PanelImagen():
     def __init__(self, root):
-        self.width = 480
+        self.width = 427
         self.height = 320
 
         self.frame = Tk.Frame(root, width=self.width, height=self.height)
@@ -66,10 +66,10 @@ class PanelLateral():
                                            text="Selecionar Imagen")
         self.botonSelectImagen.pack(side="top", fill=Tk.BOTH)
 
-        self.textoTema = Tk.Label(self.frame, text='Seleccionar Tema')
-        self.textoTema.pack(side='top', fill=Tk.BOTH)
-        self.listaTema = ttk.Combobox(self.frame, state="readonly")
-        self.listaTema.pack(side="top", fill=Tk.BOTH)
+        self.textoTemas = Tk.Label(self.frame, text='Seleccionar Tema')
+        self.textoTemas.pack(side='top', fill=Tk.BOTH)
+        self.listaTemas = ttk.Combobox(self.frame, state="readonly")
+        self.listaTemas.pack(side="top", fill=Tk.BOTH)
 
         self.textoCrearSkin = Tk.Label(self.frame, text='Crear Skin')
         self.textoCrearSkin.pack(side='top', fill=Tk.BOTH)
