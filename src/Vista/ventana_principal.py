@@ -1,4 +1,5 @@
 import tkinter as Tk
+from tkinter import ttk
 from tkinter import TclError
 from PIL import Image
 from PIL import ImageTk
@@ -64,6 +65,11 @@ class PanelLateral():
         self.botonSelectImagen = Tk.Button(self.frame,
                                            text="Selecionar Imagen")
         self.botonSelectImagen.pack(side="top", fill=Tk.BOTH)
+
+        self.textoTema = Tk.Label(self.frame, text='Seleccionar Tema')
+        self.textoTema.pack(side='top', fill=Tk.BOTH)
+        self.listaTema = ttk.Combobox(self.frame, state="readonly")
+        self.listaTema.pack(side="top", fill=Tk.BOTH)
 
         self.textoCrearSkin = Tk.Label(self.frame, text='Crear Skin')
         self.textoCrearSkin.pack(side='top', fill=Tk.BOTH)
