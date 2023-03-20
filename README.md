@@ -11,3 +11,4 @@ Esta es una herramienta hecha para crear skins personalizados para TWiLight Menu
 Actualmente solo permite seleccionar una imagen y colocarle la interfaz del tema "white".
 
 A futuro el objetivo es poder crear y modificar cada uno de los aspectos del menú directamente desde la herramienta.
+
