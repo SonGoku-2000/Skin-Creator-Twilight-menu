@@ -1,4 +1,5 @@
 import tkinter as Tk
+from tkinter import messagebox
 
 from pathlib import Path
 from src.Modelo.modelo import modelo
@@ -14,11 +15,13 @@ class Controller():
         self.modelo = modelo()
 
         self.view = ventanaPrincipal(self.root)
-        self.view.panelLateral.botonSelectImagen.bind("<Button>",
-                                                      self.seleccionarImagen)
-        self.view.panelLateral.botonCrearSkin.bind("<Button>", self.crearSkin)
+
+        self.view.panelLateral.botonSelectImagen.configure(
+            command=self.seleccionarImagen)
+        self.view.panelLateral.botonCrearSkin.configure(command=self.crearSkin)
         self.view.panelLateral.listaTemas["values"] = self.modelo.TEMAS
         self.view.panelLateral.listaTemas.set(self.modelo.TEMAS[0])
+        self.view.panelImagen.setImagen(Path("src/Vista/a.jpg"))
 
     def run(self):
         """
@@ -26,7 +29,7 @@ class Controller():
         """
         self.root.mainloop()
 
-    def seleccionarImagen(self, event):
+    def seleccionarImagen(self):
         """
         Accion para el boton de seleccionarImagen. Mostrando una previsualizacion de la imagen seleccionada.
         En caso de no elegir una imagen se pondra en blanco la previsualizacion.
@@ -40,11 +43,16 @@ class Controller():
             self.view.panelImagen.setImagen(Path("src/Vista/a.jpg"))
         self.root.mainloop()
 
-    def crearSkin(self, event):
+    def crearSkin(self):
         """
         Accion para el boton crearSkin. Crea las carpetas necesarias para crear la skin usando la funcion del modelo.py
         """
-        self.modelo.crearSkin(nombrePaquete=self.view.panelLateral.entradaTextoNombreSkin.get(),paqueteBase=self.view.panelLateral.listaTemas.get())
+        if(self.view.panelLateral.entradaTextoNombreSkin.get() == ""):
+            messagebox.showerror(
+                "Advertencia", "No puede dejar el nombre vacio")
+        else:
+            self.modelo.crearSkin(nombrePaquete=self.view.panelLateral.entradaTextoNombreSkin.get(
+            ), paqueteBase=self.view.panelLateral.listaTemas.get())
 
 
 if __name__ == "__main__":
