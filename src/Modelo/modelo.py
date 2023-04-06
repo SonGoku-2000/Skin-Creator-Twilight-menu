@@ -1,6 +1,6 @@
 from pathlib import Path
 from distutils.dir_util import copy_tree
-from tkinter.filedialog import askopenfilename,askdirectory
+from tkinter.filedialog import askopenfilename, askdirectory, asksaveasfilename
 from PIL import Image
 
 
@@ -9,10 +9,11 @@ class modelo():
         self.CARPETA_IMAGENES = Path("Imagenes")
         self.CARPETA_PLANTILLAS = self.CARPETA_IMAGENES.joinpath("Plantillas")
         self.CARPETA_SKINS = Path("Skins")
-        self.TEMAS = ("white","black")
+        self.TEMAS = ("white", "black")
 
         self.TAMANO_A_CONVERTIR = (256, 192)
         self.dirImagen = ""
+        self.nombrePaquete = ""
 
     def __selectorImagen(self, dirBase: str = '.') -> str:
         """
@@ -36,6 +37,33 @@ class modelo():
             return ""
         else:
             return archivo
+
+    def __selectorNombre(self, dirBase: str = '.') -> str:
+        """
+        Despliega una ventana para seleccionar un nombre para el paquete
+
+        Parameters
+        ----------
+        dirBase : str
+            Carpeta inicial de la ventana para seleccionar.
+
+        Returns
+        -------
+        str
+            Retorna el nombre del paquete.
+        """
+        archivo = asksaveasfilename(title='Seleccione un nombre',
+                                    initialdir=dirBase)
+        if archivo == ():
+            return ""
+        else:
+            return archivo
+
+    def seleccionarNombre(self):
+        """
+        Establece el valor de la variable nombrePaquete usando el metodo __selectorNombre()
+        """
+        self.nombrePaquete = self.__selectorNombre()
 
     def __guardarImagen(self, dirImagen: Path, dirSalida: Path, nombreSalida: str):
         """
@@ -179,7 +207,7 @@ class modelo():
                              carpetaSkin.joinpath("background"),
                              "top.png")
 
-    def crearSkin(self, nombrePaquete: str = "white", paqueteBase: str = "white"):
+    def crearSkin(self, paqueteBase: str = "white"):
         """
         Parameters
         ----------
@@ -193,7 +221,7 @@ class modelo():
             Nombre de la decoracion base que se usa para crear el paquete puede ser "white" o "dark".
         """
 
-        carpetaSkin = self.CARPETA_SKINS.joinpath(nombrePaquete)
+        carpetaSkin = self.CARPETA_SKINS.joinpath(self.nombrePaquete)
         carpetaSkin.mkdir(parents=True, exist_ok=True)
         dirImagenBase = Path(self.dirImagen)
 
@@ -217,12 +245,11 @@ class modelo():
 
         copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "volume").__str__(),
                   carpetaSkin.joinpath("volume").__str__())
-        
 
 
 if __name__ == '__main__':
     model = modelo()
-    print(askdirectory())
+    model.seleccionarNombre()
+    print(model.nombrePaquete)
     model.seleccionarImagen()
-    model.crearSkin(nombrePaquete="pepe")
-    
+    model.crearSkin()
