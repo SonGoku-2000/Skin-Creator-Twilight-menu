@@ -1,6 +1,6 @@
 from pathlib import Path
 from distutils.dir_util import copy_tree
-from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfilename,askdirectory
 from PIL import Image
 
 
@@ -28,7 +28,7 @@ class modelo():
         str
             Retorna la imagen seleccionada en la ventana emergente.
         """
-        archivo = askopenfilename(title='Seleccione un juego',
+        archivo = askopenfilename(title='Seleccione una imagen',
                                   initialdir=dirBase,
                                   filetypes=(('Imagenes', ('*.jpg', '*.jpeg', '*.png')),
                                              ('All', '*.*')))
@@ -203,23 +203,26 @@ class modelo():
         self.__imagenBottomMoving(dirImagenBase, carpetaSkin, paqueteBase)
         self.__imagenTop(dirImagenBase, carpetaSkin, paqueteBase)
 
-        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "battery").__str__(),
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "battery").__str__(),
                   carpetaSkin.joinpath("battery").__str__())
 
-        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "grf").__str__(),
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "grf").__str__(),
                   carpetaSkin.joinpath("grf").__str__())
 
-        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "quickmenu").__str__(),
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "quickmenu").__str__(),
                   carpetaSkin.joinpath("quickmenu").__str__())
 
-        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "ui").__str__(),
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "ui").__str__(),
                   carpetaSkin.joinpath("ui").__str__())
 
-        copy_tree(self.CARPETA_PLANTILLAS.joinpath(nombrePaquete, "volume").__str__(),
+        copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "volume").__str__(),
                   carpetaSkin.joinpath("volume").__str__())
+        
 
 
 if __name__ == '__main__':
     model = modelo()
+    print(askdirectory())
     model.seleccionarImagen()
-    model.crearSkin()
+    model.crearSkin(nombrePaquete="pepe")
+    
