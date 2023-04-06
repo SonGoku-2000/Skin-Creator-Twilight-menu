@@ -44,7 +44,7 @@ class Controller():
         """
         Accion para el boton crearSkin. Crea las carpetas necesarias para crear la skin usando la funcion del modelo.py
         """
-        self.modelo.crearSkin(paqueteBase=self.view.panelLateral.listaTemas.get())
+        self.modelo.crearSkin(nombrePaquete=self.view.panelLateral.entradaTextoNombreSkin.get(),paqueteBase=self.view.panelLateral.listaTemas.get())
 
 
 if __name__ == "__main__":
