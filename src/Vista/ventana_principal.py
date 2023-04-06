@@ -78,11 +78,6 @@ class PanelLateral():
                                         text="Crear Skin")
         self.botonCrearSkin.pack(side="top", fill=Tk.BOTH)
 
-        self.textoNombreSkin = Tk.Label(self.frame, text='Nombre de la skin')
-        self.textoNombreSkin.pack(side='top', fill=Tk.BOTH)
-        self.entradaTextoNombreSkin = Tk.Entry(self.frame)
-        self.entradaTextoNombreSkin.pack(side="top", fill=Tk.BOTH)
-
     def desactivarBotonCrearSkin(self):
         self.botonCrearSkin['state'] = Tk.DISABLED
 
