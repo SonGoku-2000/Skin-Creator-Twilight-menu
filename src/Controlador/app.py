@@ -16,12 +16,10 @@ class Controller():
 
         self.view = ventanaPrincipal(self.root)
 
-        self.view.panelLateral.botonSelectImagen.configure(
-            command=self.seleccionarImagen)
-        self.view.panelLateral.botonCrearSkin.configure(command=self.crearSkin)
-        self.view.panelLateral.listaTemas["values"] = self.modelo.TEMAS
-        self.view.panelLateral.listaTemas.set(self.modelo.TEMAS[0])
-        self.view.panelImagen.setImagen(Path("src/Vista/a.jpg"))
+        self.view.setFuncBotonSelectImagen(command=self.seleccionarImagen)
+        self.view.setFuncBotonSelectImagen(command=self.crearSkin)
+        self.view.setListaTemas(self.modelo.TEMAS)
+        self.view.setImagen(Path("src/Vista/a.jpg"))
 
     def run(self):
         """
@@ -36,11 +34,11 @@ class Controller():
         """
         self.modelo.seleccionarImagen()
         if self.modelo.dirImagen != "":
-            self.view.panelLateral.activarBotonCrearSkin()
-            self.view.panelImagen.setImagen(Path(self.modelo.dirImagen))
+            self.view.activarBotonCrearSkin()
+            self.view.setImagen(Path(self.modelo.dirImagen))
         else:
-            self.view.panelLateral.desactivarBotonCrearSkin()
-            self.view.panelImagen.setImagen(Path("src/Vista/a.jpg"))
+            self.view.desactivarBotonCrearSkin()
+            self.view.setImagen(Path("src/Vista/a.jpg"))
         self.root.mainloop()
 
     def crearSkin(self):
