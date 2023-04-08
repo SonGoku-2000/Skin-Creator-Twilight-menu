@@ -51,9 +51,12 @@ class Controller():
         if(self.modelo.nombrePaquete == ""):
             messagebox.showerror(
                 "Advertencia", "No puede dejar el nombre vacio")
+            self.view.setLabelEstado("Estado: error nombre no valido")
         else:
+            self.view.setLabelEstado("Estado: creando skin...")
             self.modelo.crearSkin(
                 paqueteBase=self.view.panelLateral.listaTemas.get())
+            self.view.setLabelEstado("Estado: Skin creada")
 
 
 if __name__ == "__main__":

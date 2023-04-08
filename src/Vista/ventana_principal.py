@@ -22,6 +22,8 @@ class ventanaPrincipal():
         self.panelLateral = PanelLateral(master)
         self.panelImagen = PanelImagen(master)
 
+    def setLabelEstado(self, texto: str):
+        self.panelLateral.__setLabelEstado(texto )
 
 class PanelImagen():
     def __init__(self, root):
@@ -78,6 +80,9 @@ class PanelLateral():
                                         text="Crear Skin")
         self.botonCrearSkin.pack(side="top", fill=Tk.BOTH)
 
+        self.lblEstado = Tk.Label(self.frame, text='Estado:')
+        self.lblEstado.pack(side='top', fill=Tk.BOTH)
+
     def desactivarBotonCrearSkin(self):
         self.botonCrearSkin['state'] = Tk.DISABLED
 
@@ -93,6 +98,8 @@ class PanelLateral():
         else:
             self.botonCrearSkin['state'] = Tk.NORMAL
 
+    def __setLabelEstado(self, texto:str):
+        self.lblEstado.config( text=texto )
 
 if __name__ == '__main__':
     raiz = Tk.Tk()
