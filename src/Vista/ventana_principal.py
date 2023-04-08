@@ -23,7 +23,40 @@ class ventanaPrincipal():
         self.panelImagen = PanelImagen(master)
 
     def setLabelEstado(self, texto: str):
-        self.panelLateral.__setLabelEstado(texto )
+        self.panelLateral.__setLabelEstado(texto)
+
+    def desactivarBotonCrearSkin(self):
+        self.panelLateral.__desactivarBotonCrearSkin()
+
+    def activarBotonCrearSkin(self):
+        self.panelLateral.__activarBotonCrearSkin()
+
+    def cambiarEstadoBotonCrearSkin(self):
+        """
+        Invierte el estado del boton crearSkin de NORMAL a DISABLED y de DISABLED a NORMAL
+        """
+        self.panelLateral.__cambiarEstadoBotonCrearSkin()
+
+    def setImagen(self, dirImagen: Path):
+        """
+        Establece la imagen de la previsualizacion
+
+        Parameters
+        ----------
+        dirImagen : Path
+            Ruta de la imagen la cual se va a usar para la previsualizacion.
+        """
+        self.panelImagen.setImagen(dirImagen)
+
+    def setFuncBotonSelectImagen(self, command):
+        self.panelLateral.botonSelectImagen.configure(command=command)
+    
+    def setFuncBotonCrearSkin(self, command):
+        self.panelLateral.botonCrearSkin.configure(command=command)
+
+    def setListaTemas(self, temas:tuple):
+        self.panelLateral.listaTemas["values"] = temas
+        self.panelLateral.listaTemas.set(temas[0])
 
 class PanelImagen():
     def __init__(self, root):
@@ -83,13 +116,13 @@ class PanelLateral():
         self.lblEstado = Tk.Label(self.frame, text='Estado:')
         self.lblEstado.pack(side='top', fill=Tk.BOTH)
 
-    def desactivarBotonCrearSkin(self):
+    def __desactivarBotonCrearSkin(self):
         self.botonCrearSkin['state'] = Tk.DISABLED
 
-    def activarBotonCrearSkin(self):
+    def __activarBotonCrearSkin(self):
         self.botonCrearSkin['state'] = Tk.NORMAL
 
-    def cambiarEstadoBotonCrearSkin(self):
+    def __cambiarEstadoBotonCrearSkin(self):
         """
         Invierte el estado del boton crearSkin de NORMAL a DISABLED y de DISABLED a NORMAL
         """
@@ -98,12 +131,13 @@ class PanelLateral():
         else:
             self.botonCrearSkin['state'] = Tk.NORMAL
 
-    def __setLabelEstado(self, texto:str):
-        self.lblEstado.config( text=texto )
+    def __setLabelEstado(self, texto: str):
+        self.lblEstado.config(text=texto)
+
 
 if __name__ == '__main__':
     raiz = Tk.Tk()
     v = ventanaPrincipal(raiz)
-    v.panelImagen.setImagen(Path(
+    v.setImagen(Path(
         "/home/songoku/Documentos/Proyectos_programacion/Python/Skin Creator Twiligt menu++/Imagenes/Plantillas/gine.jpg"))
     raiz.mainloop()
