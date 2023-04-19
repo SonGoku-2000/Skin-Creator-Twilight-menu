@@ -23,13 +23,13 @@ class ventanaPrincipal():
         self.panelImagen = PanelImagen(master)
 
     def setLabelEstado(self, texto: str):
-        self.panelLateral.__setLabelEstado(texto)
+        self.panelLateral.setLabelEstado(texto)
 
     def desactivarBotonCrearSkin(self):
         self.panelLateral.__desactivarBotonCrearSkin()
 
     def activarBotonCrearSkin(self):
-        self.panelLateral.__activarBotonCrearSkin()
+        self.panelLateral.activarBotonCrearSkin()
 
     def cambiarEstadoBotonCrearSkin(self):
         """
@@ -119,7 +119,7 @@ class PanelLateral():
     def __desactivarBotonCrearSkin(self):
         self.botonCrearSkin['state'] = Tk.DISABLED
 
-    def __activarBotonCrearSkin(self):
+    def activarBotonCrearSkin(self):
         self.botonCrearSkin['state'] = Tk.NORMAL
 
     def __cambiarEstadoBotonCrearSkin(self):
@@ -131,7 +131,7 @@ class PanelLateral():
         else:
             self.botonCrearSkin['state'] = Tk.NORMAL
 
-    def __setLabelEstado(self, texto: str):
+    def setLabelEstado(self, texto: str):
         self.lblEstado.config(text=texto)
 
 
