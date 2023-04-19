@@ -1,5 +1,6 @@
 from pathlib import Path
 from distutils.dir_util import copy_tree
+from distutils.file_util import copy_file
 from tkinter.filedialog import askopenfilename, askdirectory, asksaveasfilename
 from PIL import Image
 
@@ -38,7 +39,7 @@ class modelo():
         else:
             return archivo
 
-    def __selectorNombre(self, dirBase: str = '.') -> str:
+    def __selectorNombre(self, dirBase: str = './Skins') -> str:
         """
         Despliega una ventana para seleccionar un nombre para el paquete
 
@@ -245,6 +246,9 @@ class modelo():
 
         copy_tree(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "volume").__str__(),
                   carpetaSkin.joinpath("volume").__str__())
+
+        copy_file(self.CARPETA_PLANTILLAS.joinpath(paqueteBase, "theme.ini").__str__(),
+                  carpetaSkin.joinpath("theme.ini").__str__())
 
 
 if __name__ == '__main__':
