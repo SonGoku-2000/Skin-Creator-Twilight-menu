@@ -17,7 +17,7 @@ class Controller():
         self.view = ventanaPrincipal(self.root)
 
         self.view.setFuncBotonSelectImagen(command=self.seleccionarImagen)
-        self.view.setFuncBotonSelectImagen(command=self.crearSkin)
+        self.view.setFuncBotonCrearSkin(command=self.crearSkin)
         self.view.setListaTemas(self.modelo.TEMAS)
         self.view.setImagen(Path("src/Vista/a.jpg"))
 
